@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTML without styles</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon-bom.png">
+</head>
+
+<body>
+    <header>
+        <h2>Основи web (HTML, CSS). Кодування символів</h2>
+        <nav>
+            <a href="#">Home</a> |
+            <a href="#">About</a> |
+            <a href="#">Contact</a> |
+            <a href="#">Blog</a> |
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>First task</h2>
+            <p>Протестуй сайт <a href="https://organicroom.com">organicroom.com</a> знайшовши 3 баги; запиши їх в
+                Google docs. </p>
+        </section>
+
+        <section class="screenshots">
+            <h1>Bugs on site <a href="https://organicroom.com">organicroom.com</a></h1>
+
+            <div class="cards">
+                <div class="card">
+                    <img class="zoomable" src="./images/bug1.png" width="800" alt="Screenshot of bug1">
+                    <h2>Test Case 1: Можливість введення нереалістично великої кількості товару в кошику</h2>
+                    <b>
+                        Передумови:
+                    </b>
+                    <ol>
+                        <li>У кошику є хоча б один товар</li>
+                        <li>Користувач знаходиться на сторінці /cart</li>
+                    </ol>
+                    <b>
+                        Кроки для відтворення:
+                    </b>
+                    <ol>
+                        <li>Перейти на сторінку кошика</li>
+                        <li>У полі Кількість ввести значення 1000000</li>
+                        <li>Натиснути кнопку оновлення кошика (або дочекатися автооновлення)</li>
+                    </ol>
+
+                    <b> Фактичний результат:</b>
+                    <p>Система приймає значення 100000;
+                        Загальна сума кошика обчислюється як 2 750 000 000 ₴
+                    </p>
+
+                    <b>Очікуваний результат: </b>
+                    <p>Поле кількості має обмеження (max value);
+                        Або з’являється повідомлення про помилку;
+                        Або кількість автоматично коригується до допустимого максимуму
+                    </p>
+
+                </div>
+
+                <div class="card">
+                    <img class="zoomable" src="./images/bug2.png" width="600" alt="Screenshot of bug2">
+                    <h2>Test Case 2: Відсутній адаптивний дизайн хедера на нестандартних екранах</h2>
+                    <b>
+                        Передумови:
+                    </b>
+                    <ol>
+                        <li>Сайт відкрито у браузері Google Chrome</li>
+                        <li>Розмір екрану ~980x600 пікселів</li>
+                    </ol>
+                    <b>
+                        Кроки для відтворення:
+                    </b>
+                    <ol>
+                        <li>Відкрити сторінку категорії або головну сторінку</li>
+                        <li>Відкрити DevTools</li>
+                        <li>Встановити нестандартну ширину екрану (наприклад ~985px)</li>
+                        <li>Спостерігати за хедером</li>
+                    </ol>
+
+                    <b> Фактичний результат:</b>
+                    <p>Хедер не адаптується, що призводить до перекриття елементів та
+                        погіршення
+                        користувацького досвіду.
+                    </p>
+
+                    <b>Очікуваний результат: </b>
+                    <p>Хедер повинен адаптуватися до ширини екрану, зберігаючи
+                        читабельність та функціональність.
+                    </p>
+
+                </div>
+
+                <div class="card">
+                    <img class="zoomable" src="./images/bug3.png" width="600" alt="Screenshot of bug3">
+                    <h2>Test Case 3: Некоректний рік у футері сайту</h2>
+                    <b>
+                        Передумови:
+                    </b>
+                    <ol>
+                        <li>Користувач відкриває будь-яку сторінку сайту OrganicRoom</li>
+                        <li>Поточний календарний рік — 2026</li>
+                    </ol>
+                    <b>
+                        Кроки для відтворення:
+                    </b>
+                    <ol>
+                        <li>Перейти на будь-яку сторінку сайту (наприклад, сторінку товару)</li>
+                        <li>Прокрутити сторінку до футера</li>
+                        <li>Знайти блок з copyright</li>
+                    </ol>
+
+                    <b> Фактичний результат:</b>
+                    <p>У футері відображається рік 2025: © 2025 OrganicRoom. All Rights Reserved.
+                    </p>
+
+                    <b>Очікуваний результат: </b>
+                    <p>У футері відображається поточний рік: © 2026 OrganicRoom. All Rights Reserved.
+                    </p>
+
+                </div>
+
+                <div class="image-modal" id="imageModal">
+                    <span class="close">&times;</span>
+                    <img class="modal-image" id="modalImage">
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        <p>&copy; 2026 My Website</p>
+    </footer>
+
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.image-modal .close');
+
+        document.querySelectorAll('.zoomable').forEach(img => {
+            img.addEventListener('click', () => {
+                modal.classList.add('active');
+                modalImage.src = img.src;
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', e => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        function closeModal() {
+            modal.classList.remove('active');
+            modalImage.src = '';
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+
+</html>

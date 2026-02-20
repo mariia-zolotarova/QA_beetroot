@@ -1,0 +1,150 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #35424a;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+nav a {
+    color: #ffffff;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+section,
+article {
+    background: #ffffff;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+
+.screenshots {
+    /* max-width: 1500px; */
+    margin: 0 auto;
+}
+
+.screenshots h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card h2 {
+    font-size: 20px;
+    margin: 20px 20px 10px;
+}
+
+.card p {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 20px 25px;
+    color: #555;
+}
+
+.card b {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 20px 25px;
+    color: #555;
+}
+
+.card ol {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 40px 25px;
+    color: #555;
+}
+
+.zoomable {
+    cursor: zoom-in;
+}
+
+.image-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+}
+
+.image-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-image {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+}
+
+footer {
+    background-color: #35424a;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
